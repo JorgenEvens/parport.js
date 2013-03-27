@@ -64,6 +64,11 @@ public:
   } V8_CB_END()
 
   //Write methods
+  static V8_CB(DataDirection) {
+    ParportWrap* inst = Unwrap(args.This());
+    inst->port.setDataDirection(v8u::Int(args[0]));
+    V8_RET(v8::Undefined());
+  } V8_CB_END()
   static V8_CB(WriteData) {
     ParportWrap* inst = Unwrap(args.This());
     inst->port.writeData(v8u::Int(args[0]));
@@ -91,6 +96,7 @@ public:
     V8_DEF_CB("readData", ReadData);
     V8_DEF_CB("readStatus", ReadStatus);
     V8_DEF_CB("readControl", ReadControl);
+    V8_DEF_CB("setDataDirection", DataDirection);
     V8_DEF_CB("writeData", WriteData);
     //V8_DEF_CB("writeStatus", WriteStatus);
     V8_DEF_CB("writeControl", WriteControl);

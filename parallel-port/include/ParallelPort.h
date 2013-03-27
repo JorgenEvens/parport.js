@@ -71,7 +71,7 @@ public:
 	/**
 	 * @brief Read a byte from data pins (usually 0x378)
 	 */
-	char readData() throw (std::runtime_error);
+	unsigned char readData() throw (std::runtime_error);
 
 	/**
 	 * @brief Read a byte from control pins (usually 0x37a)
@@ -81,22 +81,27 @@ public:
 	 * writeControl method or the data that was there before you perform
 	 * a writeControl
 	 */
-	char readControl() throw (std::runtime_error);
+	unsigned char readControl() throw (std::runtime_error);
 
 	/**
 	 * @brief Read a byte from status pins (usually 0x379)
 	 */
-	char readStatus() throw (std::runtime_error);
+	unsigned char readStatus() throw (std::runtime_error);
+
+	/**
+	 * @brief Set the direction of the Data pins ( read: 255, write: 0 )
+	 */
+	void setDataDirection(unsigned char direction) throw (std::runtime_error);
 
 	/**
 	 * @brief Write data to data pins (usually 0x378)
 	 */
-	void writeData(char value) throw (std::runtime_error);
+	void writeData(unsigned char value) throw (std::runtime_error);
 	
 	/**
 	 * @brief Write data to control pins (usually 0x37a)
 	 */
-	void writeControl(char value) throw (std::runtime_error);
+	void writeControl(unsigned char value) throw (std::runtime_error);
 
 	/**
 	 * @brief Write data to status pins (usually 0x379)

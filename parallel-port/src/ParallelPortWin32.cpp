@@ -100,23 +100,27 @@ void ParallelPort::close()
 		}
 	}
 }
-char ParallelPort::readData() throw (std::runtime_error)
+unsigned char ParallelPort::readData() throw (std::runtime_error)
 {
-	return (char) (win32Input)(dataPortAddr);
+	return (unsigned char) (win32Input)(dataPortAddr);
 }
-char ParallelPort::readControl() throw (std::runtime_error)
+unsigned char ParallelPort::readControl() throw (std::runtime_error)
 {
-	return (char) (win32Input)(controlPortAddr);
+	return (unsigned char) (win32Input)(controlPortAddr);
 }
-char ParallelPort::readStatus() throw (std::runtime_error)
+unsigned char ParallelPort::readStatus() throw (std::runtime_error)
 {
 	return (char) win32Input(statusPortAddr);
 }
-void ParallelPort::writeData(char value) throw (std::runtime_error)
+void ParallelPort::setDataDirection(unsigned char value) throw (std::runtime_error)
+{
+	// TODO: Find windows equivalent
+}
+void ParallelPort::writeData(unsigned char value) throw (std::runtime_error)
 {
 	(win32Ouput)(dataPortAddr, (short) value);
 }
-void ParallelPort::writeControl(char value) throw (std::runtime_error)
+void ParallelPort::writeControl(unsigned char value) throw (std::runtime_error)
 {
 	(win32Ouput)(controlPortAddr, (short) value);
 }

@@ -85,9 +85,9 @@ void ParallelPort::close()
 	::close(fd);
 }
 
-char ParallelPort::readData() throw (std::runtime_error)
+unsigned char ParallelPort::readData() throw (std::runtime_error)
 {
-	char ret;
+	unsigned char ret;
 	if (ioctl(fd, PPRDATA, &ret) != 0)
 	{
 		throw runtime_error(string("Unable to read DATA on ") + parportPath);
@@ -95,9 +95,9 @@ char ParallelPort::readData() throw (std::runtime_error)
 	return ret;
 }
 
-char ParallelPort::readControl() throw (std::runtime_error)
+unsigned char ParallelPort::readControl() throw (std::runtime_error)
 {
-	char ret;
+	unsigned char ret;
 	if (ioctl(fd, PPRCONTROL, &ret) != 0)
 	{
 		throw runtime_error(string("Unable to read CONTROL on ") + parportPath);
@@ -105,9 +105,9 @@ char ParallelPort::readControl() throw (std::runtime_error)
 	return ret;
 }
 
-char ParallelPort::readStatus() throw (std::runtime_error)
+unsigned char ParallelPort::readStatus() throw (std::runtime_error)
 {
-	char ret;
+	unsigned char ret;
 	if (ioctl(fd, PPRSTATUS, &ret) != 0)
 	{
 		throw runtime_error(string("Unable to read STATUS on ") + parportPath);
@@ -115,7 +115,15 @@ char ParallelPort::readStatus() throw (std::runtime_error)
 	return ret;
 }
 
-void ParallelPort::writeData(char value) throw (std::runtime_error)
+void ParallelPort::setDataDirection(unsigned char value) throw (std::runtime_error)
+{
+	if (ioctl(fd, PPDATADIR, &value) != 0)
+	{
+		throw runtime_error(string("Unable to set direction of DATA on ") + parportPath);
+	}
+}
+
+void ParallelPort::writeData(unsigned char value) throw (std::runtime_error)
 {
 	if (ioctl(fd, PPWDATA, &value) != 0)
 	{
@@ -123,7 +131,7 @@ void ParallelPort::writeData(char value) throw (std::runtime_error)
 	}
 }
 
-void ParallelPort::writeControl(char value) throw (std::runtime_error)
+void ParallelPort::writeControl(unsigned char value) throw (std::runtime_error)
 {
 	if (ioctl(fd, PPWCONTROL, &value) != 0)
 	{
