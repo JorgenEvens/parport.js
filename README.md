@@ -39,6 +39,24 @@ And remember:
 Full documentation can be found under `doc/`.  
 More examples can be found under `examples/`.
 
+## API
+
+**Read**
+
+```javascript
+port.readData(); // Reads 1 byte from the DATA pins.
+port.readStatus(); // Reads 1 byte from the STATUS pins.
+port.readControl(); // Reads 1 byte from CONTROL pins.
+```
+
+**Write**
+
+```javascript
+port.writeData( 255 ); // Set the DATA pins to the byte provided.
+port.writeControl( 255 ); // Set the CONTROL pins to the byte provided.
+port.setDataDirection( 0 ); // Set direction of DATA pins. In: 255, Out: 0
+```
+
 ## Compatibility
 
 **Important:** these are only the bindings to Node.JS. The common interface
